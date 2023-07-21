@@ -10,7 +10,7 @@ const Cube = ({ scene, isVisible, setIsVisible }) => {
   const cubeRef = useRef(null);
 
   useEffect(() => {
-    // Create a 3D cube
+
     const newCube = MeshBuilder.CreateBox('cube', { size: 1 }, scene);
     newCube.position = new Vector3(0, 0, 0);
     cubeRef.current = newCube;
@@ -24,7 +24,7 @@ const Cube = ({ scene, isVisible, setIsVisible }) => {
   }, [scene]);
 
   useEffect(() => {
-    // Set the visibility of the cube based on the isVisible prop
+
     if (cubeRef.current) {
       cubeRef.current.isVisible = isVisible;
     }
@@ -50,21 +50,9 @@ const MyScene = () => {
   const [isZoomSliderVisible, setIsZoomSliderVisible] = useState(false);
   const [zoomValue, setZoomValue] = useState(5);
 
-  const handleSceneReady = () => {
-   
+  const handleSceneReady = (scene) => {
 
-    // Register the glTF loader
-    // const gltfLoader = new GLTFFileLoader();
-    // gltfLoader.initScene = null;
-    // scene.useRightHandedSystem = true;
-    // scene.useDelayedTextureLoading = true;
-
-    // Load your glTF models using the glTF loader
-    // Example:
-    // gltfLoader.load('path/to/your/model.gltf', (gltfScene) => {
-    //   // Process the loaded glTF scene
-    //   // Add meshes, animations, etc.
-    // });
+    sceneRef.current = scene;
   };
 
   const handleZoomButtonClick = () => {
@@ -90,12 +78,12 @@ const MyScene = () => {
 
   return (
     <div>
-      {/* Update the inline styles for the "Hide" button */}
-      <button style={{ width: '80px' ,height:'30px',marginRight:'30px'}}  onClick={handleHideButtonClick}>
+
+      <button style={{ width: '80px', height: '30px', marginRight: '30px' }} onClick={handleHideButtonClick}>
         Hide
       </button>
-      <button style={{ width: '100px' ,height:'30px',marginRight:'30px'}}  onClick={handleShowButtonClick}>Show</button>
-      <button style={{ width: '100px' ,height:'30px',marginRight:'30px'}} onClick={handleZoomButtonClick}>
+      <button style={{ width: '100px', height: '30px', marginRight: '30px' }} onClick={handleShowButtonClick}>Show</button>
+      <button style={{ width: '100px', height: '30px', marginRight: '30px' }} onClick={handleZoomButtonClick}>
         {isZoomSliderVisible ? 'Hide Zoom' : ' Zoom'}
       </button>
       {isZoomSliderVisible && (
